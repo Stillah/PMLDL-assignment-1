@@ -4,7 +4,7 @@ import io
 from PIL import Image
 
 
-FASTAPI_URL = "http://localhost:8000/predict/"
+FASTAPI_URL = "http://localhost:8000/predict"
 
 def main():
     st.set_page_config(page_title="Image Classifier", page_icon="📷", layout="centered")
@@ -59,32 +59,14 @@ def display_results(result):
         st.subheader("📊 Prediction Results")
         st.metric(
             label="Predicted Class", 
-            value=result.get('prediction', 'Unknown'),
+            value=result.get('predicted_class', 'Unknown'),
             delta=f"{result.get('confidence', 0) * 100:.2f}% confidence"
         )
     
     with col2:
         confidence = result.get('confidence', 0) * 100
         st.write(f"**Confidence:** {confidence:.2f}%")
-        st.write(f"**Filename:** {result.get('filename', 'Unknown')}")
-    
-    # Detailed probabilities
-    st.subheader("📈 Detailed Probabilities")
-    all_predictions = result.get('all_predictions', {})
-    
-    if all_predictions:
-        # Sort by probability (descending)
-        sorted_predictions = sorted(
-            all_predictions.items(), 
-            key=lambda x: x[1], 
-            reverse=True
-        )
-        
-        for class_name, probability in sorted_predictions:
-            percentage = probability * 100
-            st.progress(probability, text=f"{class_name}: {percentage:.2f}%")
-    else:
-        st.info("No detailed probabilities available")
+
 
 
 if __name__ == "__main__":
