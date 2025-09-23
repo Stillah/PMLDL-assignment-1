@@ -6,7 +6,6 @@ import io
 
 MODEL_PATH = 'model.pt'
 app = FastAPI(debug=True)
-
 model = torch.load(MODEL_PATH)
 
 def predict_single_image(model, image_path_or_bytes, class_names, device='cpu'):
