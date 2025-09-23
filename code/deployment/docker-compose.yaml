@@ -1,0 +1,18 @@
+services:
+  fastapi:
+    build:
+      context: api
+      dockerfile: Dockerfile.fastapi
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+
+  streamlit:
+    build:
+      context: app
+      dockerfile: Dockerfile.streamlit
+    container_name: streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - fastapi

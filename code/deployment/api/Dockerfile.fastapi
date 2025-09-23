@@ -1,0 +1,13 @@
+FROM python:3.12
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install numpy
+RUN pip install numpy fastapi Pillow uvicorn python-multipart
+RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
