@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . /app
 
 RUN pip install numpy
-RUN pip install numpy fastapi Pillow uvicorn python-multipart
+RUN pip install numpy fastapi Pillow uvicorn python-multipart torchvision
 RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
 
 EXPOSE 8000

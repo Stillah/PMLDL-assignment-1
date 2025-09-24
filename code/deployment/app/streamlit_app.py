@@ -9,7 +9,7 @@ FASTAPI_URL = "http://localhost:8000/predict"
 def main():
     st.set_page_config(page_title="Image Classifier", page_icon="📷", layout="centered")
     
-    st.title("🖼️ Image Classification")
+    st.title("🖼️ Cloths and accessories classification")
     st.markdown("Upload an image to test the classification model")
     
     st.markdown("---")
