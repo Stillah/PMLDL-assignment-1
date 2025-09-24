@@ -7,10 +7,11 @@ import io
 import torchvision.transforms as transforms
 import os
 
-MODEL_PATH = "..\\..\\..\\models\\model.pt"
+# ..\\..\\..\\models\\model.pt if not using docker
+MODEL_PATH = "./model.pt"
 labels = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-app = FastAPI(debug=True)
+app = FastAPI()
 
 # Creating model instance
 class CNN(nn.Module):
@@ -46,7 +47,7 @@ model = CNN()
 ckpt = torch.load(MODEL_PATH)
 model.load_state_dict(ckpt)
 
-def predict_single_image(model, image_path_or_bytes, class_names, device='cpu'):
+async def predict_single_image(model, image_path_or_bytes, class_names, device='cpu'):
     """
     Predict a single image
     
@@ -92,6 +93,11 @@ async def predict_image(file: UploadFile = File(...)):
         contents = await file.read()
         
         # Predict
-        return predict_single_image(model, contents, labels)
+        ans = await predict_single_image(model, contents, labels)
+        return ans
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
+
+@app.get("/")
+def root():
+    return {"message": "Backend is running"}
