@@ -4,7 +4,7 @@ import io
 from PIL import Image
 
 
-FASTAPI_URL = "http://localhost:8000/predict"
+FASTAPI_URL = "http://127.0.0.1:8000/predict"
 
 def main():
     st.set_page_config(page_title="Image Classifier", page_icon="📷", layout="centered")
