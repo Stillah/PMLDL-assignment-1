@@ -8,7 +8,7 @@ import torchvision.transforms as transforms
 import os
 
 # ..\\..\\..\\models\\model.pt if not using docker
-MODEL_PATH = "app/models/model.pt"
+MODEL_PATH = "/app/models/model.pt"
 labels = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 app = FastAPI(debug=True)
